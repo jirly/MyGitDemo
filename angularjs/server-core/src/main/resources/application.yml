@@ -1,0 +1,27 @@
+server:
+    port: 9000
+    sessionTimeout: 60000
+    contextPath: /service
+
+spring:
+    application:
+        name: ytx
+    
+    datasource:
+        name: ytxDS
+        initialize: false
+        continueOnError: false
+        driverClassName: com.mysql.jdbc.Driver
+        url: jdbc:mysql://127.0.0.1:3306/ytx?useSSL=false&sessionVariables=FOREIGN_KEY_CHECKS=0&useUnicode=yes&characterEncoding=UTF-8
+        username: root
+        password: 123456
+        max-active: 100
+        max-idle: 8
+        min-idle: 8
+        initial-size: 10
+        validation-query: select 1
+        test-on-borrow: false
+        test-on-return: false
+
+mybatis:
+    config-location: classpath:mybatis-config.xml
