@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>Index</title>
+    <meta name="author" content="" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link type="text/css" rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendor/ng-table/css/ng-table.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendor/toastr/css/toastr.min.css" />
+    <link type="text/css" rel="stylesheet" href="vendor/angular-w5c-validator/css/style.css" />
+    <link type="text/css" rel="stylesheet" href="styles/default/style.css" />
+    <script type="text/javascript" src="vendor/jquery/js/jquery.min.js"></script>
+    <script type="text/javascript" src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="vendor/angular/js/angular.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-route/js/angular-route.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-strap/js/angular-strap.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-strap/js/angular-strap.tpl.min.js"></script>
+    <script type="text/javascript" src="vendor/ng-breadcrumbs/js/ng-breadcrumbs.min.js"></script>
+    <script type="text/javascript" src="vendor/ng-table/js/ng-table.min.js"></script>
+    <script type="text/javascript" src="vendor/toastr/js/toastr.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-w5c-validator/js/w5cValidator.min.js"></script>
+</head>
+
+<body ng-controller="homeCtrl">
+    <ol class="breadcrumb">
+        <li ng-repeat="breadcrumb in breadcrumbs.get() track by breadcrumb.path" ng-class="{ active: $last }">
+            <i ng-if="$first" class="glyphicon glyphicon-home"></i>
+            <a ng-if="!$last" ng-href="#{{breadcrumb.path}}" ng-bind="breadcrumb.label" class="margin-right-xs"></a>
+            <span ng-if="$last" ng-bind="breadcrumb.label"></span>
+        </li>
+    </ol>
+    <div style="margin:10px;"><a href="#/">Home</a> / <a href="#test">Test</a> / <a href="#user/index">用户列表</a></div>
+    <div style="margin:20px;">
+        <div ng-view style="width:100%;"></div>
+    </div>
+    <script type="text/javascript" src="vendor/requirejs/js/require.js" data-main="scripts/main"></script>
+    <script type="text/ng-template" id="modal/common.tpl.html">
+        <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog {{diagCls ? diagCls : ''}}">
+                <div class="modal-content">
+                    <div class="modal-header" ng-show="title">
+                        <button type="button" class="close" aria-label="Close" ng-click="$hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" ng-bind="title" style="font-weight:bold;"></h4>
+                    </div>
+                    <div class="modal-body" ng-bind="content"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger" ng-hide="closeBtn.hide" ng-click="$hide()">关闭
+                        </button>
+                        <button type="button" ng-if="!notFormInvalid" class="btn btn-sm btn-primary" ng-hide="okBtn.hide" ng-disabled="form.$invalid || form.$pristine" ng-click="okBtn.click()">{{okBtn.text}}
+                        </button>
+                        <button type="button" ng-if="notFormInvalid" class="btn btn-sm btn-primary" ng-hide="okBtn.hide" ng-click="okBtn.click()">{{okBtn.text}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="modal/commonOptinal.tpl.html">
+        <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog {{diagCls ? diagCls : ''}}">
+                <div class="modal-content">
+                    <div class="modal-header" ng-show="title">
+                        <button type="button" class="close" aria-label="Close" ng-click="$hide()">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h4 class="modal-title" ng-bind="title" style="font-weight:bold;"></h4>
+                    </div>
+                    <div class="modal-body" ng-bind="content"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger" ng-hide="closeBtn.hide" ng-click="closeBtn.click()">{{closeBtn.text}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger" ng-hide="prevBtn.hide" ng-click="prevBtn.click()">{{prevBtn.text}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary" ng-hide="nextBtn.hide" ng-disabled="form.$invalid || form.$pristine" ng-click="nextBtn.click()">{{nextBtn.text}}
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary" ng-hide="okBtn.hide" ng-hide="okBtn.hide" ng-disabled="form.$invalid || form.$pristine" ng-click="okBtn.click()">{{okBtn.text}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="modal/confirm.tpl.html">
+        <div class="modal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" style="font-weight:bold;">操作确认</h4>
+                    </div>
+                    <div class="modal-body text-center" ng-bind="content"></div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-danger" ng-click="$hide()">取消</button>
+                        <button type="button" class="btn btn-sm btn-primary" ng-click="okBtn.click()">确定</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="modal/process.tpl.html">
+        <div class="modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" ng-show="title">
+                        <h4 class="modal-title" ng-bind-html="title"></h4>
+                    </div>
+                    <div class="modal-body" scroll-glue>
+                        <p class="text-info" ng-repeat="msg in proc.msgs track by $index">
+                            <b>{{($index + 1) + '. '}}</b>{{msg}}
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-info" ng-click="okBtn.click()">后台运行</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="modal/loading.tpl.html">
+        <div class="text-center">
+            <div ng-if="loadState==0"><img ng-src="{{img}}/loading.gif" alt="" /> <span ng-bind="loadingContent"></span>
+            </div>
+            <div ng-if="loadState==1" ng-bind="loadedContent"></div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="ng-table/headers/checkbox.html">
+        <input type="checkbox" ng-model="selectAll.checked" />
+    </script>
+    <script type="text/ng-template" id="ng-table/headers/othercheckbox.html">
+        <input type="checkbox" ng-model="selectOtherAll.checked" />
+    </script>
+    <script type="text/ng-template" id="ng-table/column/toggle.html">
+        <div class="popover" id="colsPopDiv">
+            <div class="arrow"></div>
+            <h3 class="popover-title">选择显示的列</h3>
+            <div class="popover-content" style="min-width:180px;padding:0 10px;">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-model="master" ng-click="selectAllCols(master, cols)" /> 全选</label>
+                </div>
+                <div ng-repeat="col in cols" class="checkbox" ng-show="col.toggle">
+                    <label>
+                        <input type="checkbox" ng-model="col.show" />{{col.title}}</label>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script type="text/ng-template" id="popover/popover.string.tpl.html">
+        <div class="popover" style="max-width:330px;">
+            <div class="arrow"></div>
+            <div class="popover-content">{{popover.string}}</div>
+        </div>
+    </script>
+</body>
+
+</html>
