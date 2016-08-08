@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/MyGitDemo.iml" filepath="$PROJECT_DIR$/.idea/MyGitDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angularjs/server-common/server-common.iml" filepath="$PROJECT_DIR$/angularjs/server-common/server-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angularjs/server-core/server-core.iml" filepath="$PROJECT_DIR$/angularjs/server-core/server-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/angularjs/server-sqlmapper/server-sqlmapper.iml" filepath="$PROJECT_DIR$/angularjs/server-sqlmapper/server-sqlmapper.iml" />
+    </modules>
+  </component>
+</project>
